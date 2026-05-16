@@ -1,0 +1,4 @@
+.Thumbs*
+.DS_Store
+*.env 
+
