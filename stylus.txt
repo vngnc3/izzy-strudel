@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'Berkeley Mono';
+  src: url('https://cemt2c0dp6.ufs.sh/f/wDtlfMZnQe0typQomV4RKXu2YUIdZPgVvtR3NqFkW5DfeM4x') format('woff2'),
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, .cm-content, * {
+  font-family: 'Berkeley Mono', monospace !important;
+}
+
+/* ── base background overrides ─────────── */
+.ͼu, .cm-editor {
+  background: #1c153d !important;
+  color: #e41951 !important;
+}
+
+/* ── gutters ────────────────────────────── */
+.cm-gutters {
+  background: #1c153d !important;
+  color: #525154 !important;
+}
+
+/* ── caret ──────────────────────────────── */
+.cm-cursor, .cm-dropCursor {
+  border-left-color: #76ff9f !important;
+}
+
+/* ── selection ──────────────────────────── */
+.cm-focused .cm-selectionBackground,
+.cm-selectionLayer .cm-selectionBackground {
+  background: rgba(202, 48, 199, 0.35) !important;
+}
+.cm-selectionMatch {
+  background: rgba(2, 113, 182, 0.45) !important;
+}
+
+/* ── active line ────────────────────────── */
+.cm-activeLine {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.cm-activeLineGutter {
+  background: rgba(118, 255, 159, 0.08) !important;
+}
+
+/* ── matching brackets ──────────────────── */
+.cm-matchingBracket {
+  background: rgba(0, 197, 199, 0.3) !important;
+  outline: 1px solid #00c5c7 !important;
+}
+
+/* ── syntax tokens (the hardcoded part) ─── */
+/* keywords */       .ͼc, .ͼh { color: #ca30c7 !important; }
+/* strings */         .ͼd { color: #00dc84 !important; }
+/* numbers */         .ͼf { color: #faf945 !important; }
+/* functions */       .ͼg, .ͼi { color: #60fdff !important; }
+/* operators */       .ͼe { color: #ff0051 !important; }
+/* comments */        .ͼb { color: #686868 !important; }
+/* builtins */        .ͼv, .ͼw, .ͼy { color: #6871ff !important; }
+/* types */           .ͼx { color: #bd35ec !important; }
+/* plain text */      .ͼz { color: #c7c7c7 !important; }
+/* brackets */        .ͼm { color: #686868 !important; }
+/* attributes */      .ͼ17, .ͼ1b, .ͼ1c { color: #bd35ec !important; }
+/* property names */  .ͼ1f { color: #60fdff !important; }
+/* tags */            .ͼ11 { color: #ff6e67 !important; }
+/* meta */            .ͼ1a { color: #fffc67 !important; }
+/* class names */     .ͼ1d { color: #faf945 !important; }
+/* punctuation */     .ͼ16 { color: #525154 !important; }
+
