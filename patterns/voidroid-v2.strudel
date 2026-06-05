@@ -1,0 +1,505 @@
+/*
+
+  mathdroid & vngnc presents
+
+██╗░░░██╗░█████╗░██╗██████╗░██████╗░░█████╗░██╗██████╗░
+██║░░░██║██╔══██╗██║██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗
+╚██╗░██╔╝██║░░██║██║██║░░██║██████╔╝██║░░██║██║██║░░██║
+░╚████╔╝░██║░░██║██║██║░░██║██╔══██╗██║░░██║██║██║░░██║
+░░╚██╔╝░░╚█████╔╝██║██████╔╝██║░░██║╚█████╔╝██║██████╔╝
+░░░╚═╝░░░░╚════╝░╚═╝╚═════╝░╚═╝░░╚═╝░╚════╝░╚═╝╚═════╝░
+
+  DEBUT A/V SET, 97KOBOLAB, JUNE 6TH 2026
+
+  __SETLIST__
+  dreamz pt. 1    f# minor               125 bpm 
+  graave          c# minor               125 bpm 
+  oobm            f# minor               125 bpm 
+  dreamz pt. 2    f# minor -> g minor    128 bpm 
+  GV (encore)     b  minor               120 bpm 
+
+*/
+
+setcpm(125 / 4);
+const scalez = "f#:minor";
+
+/*
+
+  PART ONE 
+  
+█▀▀▄ █▀▀█ █▀▀ █▀▀█ █▀▄▀█ ▀▀█ 　 █▀▀█ ▀▀█▀▀ ░ 　 ▄█░ 
+█░░█ █▄▄▀ █▀▀ █▄▄█ █░▀░█ ▄▀░ 　 █░░█ ░░█░░ ▄ 　 ░█░ 
+▀▀▀░ ▀░▀▀ ▀▀▀ ▀░░▀ ▀░░░▀ ▀▀▀ 　 █▀▀▀ ░░▀░░ █ 　 ▄█▄
+  
+  125 BPM in F# MINOR
+*/
+
+const mel = "0 [3 3] 3 2 0 _ 4 5 [4 4] 2 _ 2 0 2 4 5";
+const bass = "0 2 3 [<4 5> <6 3>]";
+
+_DRM1KICK: s("bd!4").bank("tr505").lpf(1200).diode("1.2:0.8").gain(1.2);
+
+_DRM1HH: s("- hh")
+  .fast(4)
+  .bank("tr505")
+  .hpf(6500)
+  .gain(0.72)
+  .room(0.62)
+  .rsize(1.1)
+  .pan(rand);
+
+_DRM1SNARE: s("- sd").bank("tr505").fast(2).gain(1.1);
+
+_DRM1CP: s("- cp").fast(2).bank("tr505").gain(0.34).room(0.62).rsize(1.1);
+
+_DRMBASS: note(bass)
+  .slow(8)
+  .s("sawtooth")
+  .scale(scalez)
+  .seg(16)
+  .trans(-24)
+  .acidenv(0.2).lpq(1)
+  // .gain(2.8) // continous
+  .gain(choose("0", "2.8").slow(2)) // slow 1 or 2 for groove
+  .diode("0.3:1.6")
+  .room(0.3)
+  .rsize(0.4)
+  ._scope();
+
+_DRM1LEAD: note(mel)
+  .slow(2)
+  .s("supersaw")
+  .scale(scalez)
+  .trans(0)
+  .detune("0.2, 0.8, 1, 0.52")
+  .room(0.87)
+  .rsize(1.3)
+  .delay(0.45)
+  .pg(slider(0.41, 0, 1.5, 0.01))
+  ._pianoroll();
+
+_DRM1LEADHIGH: note(mel)
+  .slow(2)
+  .s("supersaw")
+  .trancegate(1.25, 667, 1) // optional for chorus
+  .scale(scalez)
+  .trans(12)
+  .detune("0.2, 0.8, 0.9, 0.52")
+  .room(0.96)
+  .rsize(1.6)
+  .delay(0.62)
+  .gain(0.823)
+  .pg(slider(0.5, 0, 1, 0.01))
+  ._pianoroll();
+
+/*
+
+  PART TWO 
+───────────────────────────────────────────────────────────────────────────────────────────────
+─██████████████─████████████████───██████████████─██████████████─██████──██████─██████████████─
+─██░░░░░░░░░░██─██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██─
+─██░░██████████─██░░████████░░██───██░░██████░░██─██░░██████░░██─██░░██──██░░██─██░░██████████─
+─██░░██─────────██░░██────██░░██───██░░██──██░░██─██░░██──██░░██─██░░██──██░░██─██░░██─────────
+─██░░██─────────██░░████████░░██───██░░██████░░██─██░░██████░░██─██░░██──██░░██─██░░██████████─
+─██░░██──██████─██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██─
+─██░░██──██░░██─██░░██████░░████───██░░██████░░██─██░░██████░░██─██░░██──██░░██─██░░██████████─
+─██░░██──██░░██─██░░██──██░░██─────██░░██──██░░██─██░░██──██░░██─██░░░░██░░░░██─██░░██─────────
+─██░░██████░░██─██░░██──██░░██████─██░░██──██░░██─██░░██──██░░██─████░░░░░░████─██░░██████████─
+─██░░░░░░░░░░██─██░░██──██░░░░░░██─██░░██──██░░██─██░░██──██░░██───████░░████───██░░░░░░░░░░██─
+─██████████████─██████──██████████─██████──██████─██████──██████─────██████─────██████████████─
+───────────────────────────────────────────────────────────────────────────────────────────────
+  125 BPM in C# MINOR
+*/
+
+// DISTORTTTTTT TTTTTHHHHE FUCKING EARDRUMS
+// HARDTECH KICK TR909
+_$: s("bd!4").bank("tr909").diode("1:2").pg(1.2).duckorbit(3).duckdepth(0.5)
+
+// HARDTECH HH FAST
+_$: s("hh -")
+  .bank("tr808")
+  .fast(16)
+  .lpf(slider(8021, 3000, 11000, 1))
+  .lpq(4)
+
+// HH TWO
+_$: s("- hh").bank("tr808").fast(4);
+
+// HARMONY BASS
+_$: note("0 7 6 5 <[0 0] [0 1] [2 0] [0 3]> 2 3 4")
+  .s("sawtooth")
+  .slow(1)
+  .trans(0)
+  .scale(scalez)
+  .acidenv(0.5)
+  .diode("1:0.8");
+
+// PLUCK BASS
+_$: note("[0 3 2 3] [0 0 2 1]")
+  .s("sawtooth")
+  .slow(8)
+  .seg(8)
+  .scale(scalez)
+  .trans(-12)
+  .acidenv(slider(0.36, 0, 1, 0.02))
+  .diode("1.2:0.5")
+  .pg(1.3)
+  ._scope()
+// MAIN ARP
+_$: note("1 4 2 4 5 1 0 [0 4] 2 4 8 6 2 0")
+  .s("supersaw")
+  .trancegate(1.25, 22220, 1) // TRANCEGATE MUST ALWAYS BE ENABLED 44242 good drop seed
+  .scale(scalez)
+  .trans(12) // transpose 12st for EXTRA LOUDNESS
+  .detune("0.3, 2") // DETUNEEEEEEE FOR DA BIG DROP
+  .gain(1.1)
+  // .o(3) // ORBIT OPTIONAL
+  .lpf(slider(12288, 200, 13000, 1))
+  .fm(3) // fm3 for extra loudness
+  .room(1.5)
+  .rsize(0.9)
+  .diode("2:0.36")
+  .delay(slider(0.9, 0, 1, 0.02))
+  .delayfb(0.4)
+  .pg(slider(0.6, 0, 1, 0.01))
+  ._pianoroll();
+
+/*
+  
+  PART THREE 
+    
+█▀█ █░█ ▀█▀   █▀█ █▀▀
+█▄█ █▄█ ░█░   █▄█ █▀░
+  
+█▀▀▄ █▀▀█ █▀▀▄ █░░█    //░ █▀▄▀█ █▀▀ █▀▄▀█ █▀▀█ █▀▀█ █░░█ 
+█▀▀▄ █░░█ █░░█ █▄▄█   //░  █░▀░█ █▀▀ █░▀░█ █░░█ █▄▄▀ █▄▄█ 
+▀▀▀░ ▀▀▀▀ ▀▀▀░ ▄▄▄█  //░   ▀░░░▀ ▀▀▀ ▀░░░▀ ▀▀▀▀ ▀░▀▀ ▄▄▄█
+  
+  125 BPM in F# MINOR
+*/
+
+const oobmDrum = "akailinn";
+const bassSynth = "sawtooth";
+const leadSynth = "supersaw";
+
+// DISTORTTTTTT TTTTTHHHHE FUCKING EARDRUMS
+// HARDTECH KICK TR909
+_OOBMKICKTECH: s("bd!4").bank("tr909").diode("1:0.5").duckorbit(2)
+
+// HARDTECH HH FAST
+_OOBMFASTHAT: s("hh -")
+  .bank("tr808")
+  .fast(16)
+  .lpf(slider(8021, 3000, 11000, 1))
+  .lpq(4)
+
+_OOBMHH: s("[ - hh - hh]*2")
+  .bank(oobmDrum)
+  .hpf(7000)
+  .hpq(6)
+  .lpf(8000)
+  .lpq(4)
+  .room(0.7)
+  .rsize(2)
+  .gain(slider(0.11, 0, 0.25, 0.01))
+  .strobe("#0e6aaf")
+
+const arpArray = [
+  "<0 2 4 2 8>*16",
+  "<0 5 7 9 8>*16",
+  "<0 3 6 8 2>*16",
+  "<6 4 5 7 9>*16",
+];
+
+const bassSelector = "<0 0 0 0>"; // default 0 0 0 0, 0 2 1 0, etc.
+
+_OOBMACIDBASS: note(pick(arpArray, bassSelector.slow(2)))
+  .scale(scalez)
+  .s(bassSynth)
+  .trans(-12)
+  .acidenv(slider(0.07, 0, 1, 0.01))
+  .o(3)
+  .delay(slider(0.75, 0, 1, 0.05))
+  .delayfb(slider(0.4, 0, 1, 0.05))
+  .distort("1:0.5:diode")
+  ._pianoroll();
+_ANYLEAD: note("<0 _ _ _>*16")
+  .scale(scalez)
+  .s(leadSynth)
+  .sustain(1)
+  .slow(perlin.range(0.25, 1.25).fast(2))
+  .vib(8)
+  .vibmod(0.16)
+  .penv(1)
+  .pdec(0.08)
+  .trans(choose(0, 12).slow(16))
+  .acidenv(slider(0.32, 0, 1, 0.01))
+  .o(2)
+  .delay(slider(0.8, 0, 1, 0.05))
+  .delayfb(slider(0.6, 0, 1, 0.05))
+  .room(1.5)
+  .rsize(4)
+  // .fm(1).fmh(2) // optional
+  .gain(slider(0.36, 0, 1, 0.02))
+  // .spiral({ steady: 0.96 }) // highly optional. opinionated
+  ._scope()
+_ACIDBASSLOW: note(pick(arpArray, bassSelector.slow(2)))
+  .scale(scalez)
+  .s(bassSynth)
+  .trans(-24)
+  .acidenv(slider(0.17, 0, 1, 0.01))
+  .o(3)
+  .delay(slider(0.7, 0, 1, 0.05))
+  .delayfb(slider(0.45, 0, 1, 0.05))
+  .distort("2:0.25:diode")
+  ._scope()
+_OOBMRISER: s("white")
+  .seg(8)
+  .lpf(saw.slow(32).range(60,12000)).lpq(2)
+  .gain(0.4)
+  .pg(slider(1,0,1,0.01))
+  ._scope()
+
+_OOBMNOISE: note("c _ _ _")
+  .s("white")
+  .seg(0.5)
+  .attack(8)
+  .sustain(1)
+  .release(4)
+  .room(1.6)
+  .rsize(3.5)
+  .gain(sine.range(0.1, 0.18).slow(8))
+  ._spectrum();
+
+/*
+  
+  PART IV 
+  
+█▀▀▄ █▀▀█ █▀▀ █▀▀█ █▀▄▀█ ▀▀█ 　 █▀▀█ ▀▀█▀▀ ░ 　 █▀█ 
+█░░█ █▄▄▀ █▀▀ █▄▄█ █░▀░█ ▄▀░ 　 █░░█ ░░█░░ ▄ 　 ░▄▀ 
+▀▀▀░ ▀░▀▀ ▀▀▀ ▀░░▀ ▀░░░▀ ▀▀▀ 　 █▀▀▀ ░░▀░░ █ 　 █▄▄
+  
+  128 BPM in F# MINOR...? 
+*/
+
+const drumz = "tr505";
+const drmzpt2mel = "5 5 5 4 - 3 - 3 3 4 2 _ [4 3] [3 2] [0 1] [2 3]";
+const drmzpt2bass = "0 2 3 [<4 5> <6 3>]";
+const phrase =
+  "0 - - - 0 [0 0] 0 _ [0 0 1 0] - 0 - 0 [1 0 0 1 0 0] [2 -] [3 <5 6>]";
+
+// DISTORTTTTTT TTTTTHHHHE FUCKING EARDRUMS
+// HARDTECH KICK TR909
+_OOBMKICKTECH: s("bd!4").bank("tr909").diode("1:2").duckorbit(2);
+
+// HARDTECH HH FAST
+_OOBMFASTHAT: s("hh -")
+  .bank("tr808")
+  .fast(16)
+  .lpf(slider(9415, 3000, 11000, 1))
+  .lpq(4);
+
+_DRMZHATSTWO: s("- hh")
+  .fast(4)
+  .bank(drumz)
+  .gain(0.32)
+  .pan(rand.range(0.2, 0.8))
+  .room(0.1)
+  // .strobe("#122467")
+
+_DRMZSNARETHREE: s("- sd").fast(2).bank(drumz).gain(1.05);
+
+_DRMZCLAPTHREE: s("- cp").fast(2).bank(drumz).gain(0.34).room(0.52).rsize(0.9)
+
+
+_LARGETRANCESYNTH: note((drmzpt2mel)) // optionally, brak(mel)
+  .slow(2)
+  .s("supersaw") 
+  .scale(scalez)
+  .trancegate(1.5, 2214, 1) // gate for DA BIG DROP; default seed 2214
+  .trans(0) // trans 12 for BIG DROP
+  .detune("0.2, 0.8, 1, 0.52")
+  .room(0.87)
+  .rsize(1.3)
+  .delay(0.46)
+  .pg(slider(0.5, 0, 1.5, 0.01))
+  .o(3)
+  ._pianoroll();
+
+_ANYMPHRASE: note(phrase)
+  .slow(4)
+  .s("supersaw")
+  .scale(scalez)
+  .trans(-12) // -12 for intro and mid, trans zero for drop til the end
+  .detune("0.1, -0.2, 0.3")
+  .decay(0.18)
+  .fm(rand.range(1, 2))
+  .fmh(2)
+  .delay(0.57)
+  .delayfb(0.4)
+  .acidenv(choose("0.22", "0.28"))
+  .diode("1.32:0.56")
+  .room(0.8)
+  .rsize(0.4)
+  .pan(rand.range(0.3, 0.7))
+  .pg(slider(0.45, 0, 1, 0.01))
+  ._scope();
+
+_DRMZBASSPARTTWOEND: note(drmzpt2bass) // last song + maybe *THAT* last song too
+  .slow(8)
+  .s("sawtooth")
+  .scale(scalez)
+  .trans(-24)
+  .seg(16)
+  .acidenv(slider(0.25, 0, 1, 0.01))
+  .lpq(1.8)
+  .pg(slider(1.5, 0, 1.5, 0.01))
+  ._scope();
+
+
+/*
+
+  PART V: EPILOGUE 
+
+░░░░░░░░░███████╗███╗░░██╗░█████╗░░█████╗░██████╗░███████╗░█████╗░
+░░░░░░░░░██╔════╝████╗░██║██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+░░░░░░░░░█████╗░░██╔██╗██║██║░░╚═╝██║░░██║██████╔╝█████╗░░╚═╝███╔╝
+░░░░░░░░░██╔══╝░░██║╚████║██║░░██╗██║░░██║██╔══██╗██╔══╝░░░░░╚══╝░
+██╗██╗██╗███████╗██║░╚███║╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██╗░░
+╚═╝╚═╝╚═╝╚══════╝╚═╝░░╚══╝░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░
+
+  120 BPM in B MINOR :)
+  
+      Can't you say
+       Can't you say
+        Sometimes you say
+         Can't you say
+                          Sometimes, some days
+                        Can't you say
+                      Sometimes you say
+
+*/
+
+// GHOST KICK TR909
+const encoreDrum = `bd [bd!2] [bd!4] bd <[bd!4] [bd!2]> bd <[bd!4] [bd!8]> [bd!3]`
+const fourfourDrum = `bd!4`
+_GHOSTKICKTECH: s(encoreDrum).bank("tr909")
+  .slow(2)
+  .diode("1:2.1")
+  .duckorbit(2)
+
+// HARDTECH HH FAST
+_OOBMFASTHAT: s("hh -")
+  .bank("tr808")
+  .fast(16)
+  .lpf(slider(9415, 3000, 11000, 1))
+  .lpq(4);
+
+// GHOST HARD SNARE
+const encoreSnare = `- sd [- sd] - sd - [sd!2] [- sd] - sd [- sd] - [sd!4] [- sd] - [sd!4]`
+const basicSnare = `- sd - sd - sd - sd`
+_GHOSTSNARE: s(basicSnare).slow(2).bank("tr909").gain(1.55);
+
+// basic ahhh clap 
+_DRMZCLAPTHREE: s("- cp").fast(2).bank(drumz).gain(0.34).room(0.52).rsize(0.9)
+
+// OH cuz
+_GHOSTHATS: s("- oh")
+  .fast(4)
+  .bank("tr909")
+  .hpf(1200)
+  .gain(0.32)
+  .pan(rand.range(0.2, 0.8))
+  .room(0.6)
+
+_GHOSTBUILDUP: s("sd").bank("tr909")
+  .fast(16) // 8 -> 16 -> 32 !! ALWAYS START FROM 8
+  .lpf(saw.slow(16).range(60,12000)).lpq(2)
+
+_OOBMRISER: s("white")
+  .seg(8)
+  .lpf(saw.slow(32).range(60,12000)).lpq(2)
+  .gain(0.4)
+  .pg(slider(1,0,1,0.01))
+  ._scope()
+
+const ghostmel = "[6 _ 5] [5 4 _] <1 1 2 1> 0"
+const ghostphrase = `
+  [-3 0 - -] [0 - - 0] [- - 0 -] [-1 - -2 -]
+  [-3 - - -] [-3 - - 2] [- - 2 -] [-1 - -1 -]
+  [-3 0 - -] [0 - - 0] [- - 0 -] [-1 - 0 -]
+  [-3 - - -] [0 - - -1] [- - 0 -] [1 - 2 -]
+`
+
+_GHOSTPHRASES: note(ghostphrase)
+  .s("bytebeat")
+  .scale(scalez)
+  .slow(4)
+  .trans(-12)
+  .detune("0.2, 0.36")
+  .fm(4).fmh(2)
+  .gain(0.8)
+  .acidenv(sine.slow(4).range(0.4,0.68))
+  .delay(0.9).delayfb(0.6)
+  .room(0.85).rsize(0.8)
+  ._pianoroll()
+  ._scope()
+const ghostdrop = `
+  [-3 0 _ -] [0 _ - 0] [- - 0 _] [-1 - -2 _]
+  [-3 _ _ -] [-3 _ - 2] [2 - 2 _] [-1 _ -1 -]
+  [-3 0 _ -] [0 _ - 0] [0 - 0 -] [-1 _ 0 -]
+  [-3 _ _ -] [0 _ - -1] [-1 - 0 _] [1 _ 2 -]
+`
+_GHOSTDROP: note(ghostdrop)
+  .s("supersaw")
+  .scale(scalez)
+  .slow(4)
+  // .trancegate(1.25, 444, 1) // 444 good for drop
+  .trans(12)
+  .detune("-0.2, 1.2, 0.4")
+  .decay(8)
+  .diode("1.3:0.44")
+  .room(0.8).rsize(1.3)
+  .delay(0.9).delayfb(0.2)
+
+
+_GHOSTSYNTH: note(ghostmel)
+  .s("supersaw") 
+  .scale(scalez)
+  // .trancegate(1.25, 1441, 1) // GATE FOR DROP good ghost seed is 1441
+  .trans(0) // trans 12 for BIG DROP
+  .detune("0.2, 0.8, 1, 0.52")
+  .decay(0.8)
+  .room(0.87)
+  .rsize(1.3)
+  .delay(0.46)
+  .pg(slider(0.5, 0, 1.5, 0.01))
+  .o(3)
+  ._pianoroll()
+_ANGELVOICES: note((ghostmel))
+  .s("supersaw") 
+  .scale(scalez)
+  .trans(0) // trans 12 for BIG DROP
+  .detune("0.2, 0.8, 1, 0.52")
+  .room(0.87)
+  .rsize(1.3)
+  .delay(0.46)
+  .vowel("e [o u] a o")
+  .pg(slider(0.55, 0, 0.8, 0.01))
+  .o(3)
+  ._pianoroll()
+
+/* 
+
+█▄▄ █▀█ █▄░█ █░█ █▀   ▀█▀ █▀█ ▄▀█ █▀▀ █▄▀   █░█ █▄░█ █░░ █▀█ █▀▀ █▄▀ █▀▀ █▀▄ ▀
+█▄█ █▄█ █░▀█ █▄█ ▄█   ░█░ █▀▄ █▀█ █▄▄ █░█   █▄█ █░▀█ █▄▄ █▄█ █▄▄ █░█ ██▄ █▄▀ ▄
+
+▒█▀▀█ ▒█░▒█ ▒█▀▀▀█ ▒█▀▀▀█ ▀▀█▀▀ 　 ░ ░ ░ ░ 
+▒█░▄▄ ▒█▀▀█ ▒█░░▒█ ░▀▀▀▄▄ ░▒█░░ 　 ▄ ▄ ▄ ▄ 
+▒█▄▄█ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄▄█ ░▒█░░ 　 █ █ █ █
+
+░ ░ ░ ░ 　 　 　 　 ▒█░░▒█ ▒█▀▀▀█ ▀█▀ ▒█▀▀█ ▒█▀▀▀ ▒█▀▀▀█ 
+▄ ▄ ▄ ▄ 　 　 　 　 ░▒█▒█░ ▒█░░▒█ ▒█░ ▒█░░░ ▒█▀▀▀ ░▀▀▀▄▄ 
+█ █ █ █ 　 　 　 　 ░░▀▄▀░ ▒█▄▄▄█ ▄█▄ ▒█▄▄█ ▒█▄▄▄ ▒█▄▄▄█
+
+*/
